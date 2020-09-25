@@ -15,7 +15,7 @@ class Products extends Component {
     fetch(this.url)
       .then((response) => {
           if (response.ok)
-            return response.clone().json()
+            return response.clone().json();
           else
             return Promise.reject(response.statusText);
           }
