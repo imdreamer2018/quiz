@@ -28,5 +28,17 @@ public class GlobalExceptionHandler {
         return r;
     }
 
+    @ExceptionHandler(value = BaseProductException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionDTO ProductNameExistedExceptionHandler(HttpServletRequest req, BaseProductException e) {
+        ExceptionDTO r = new ExceptionDTO();
+        r.setMessage(e.getMessage());
+        r.setCode(400);
+        Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+        logger.error("[LOGGING]: " + e.getMessage());
+        return r;
+    }
+
 
 }
