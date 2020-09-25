@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
@@ -15,21 +14,17 @@ import java.util.List;
 @Transactional
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "product")
-public class ProductEntity {
+@Table(name = "product_order")
+public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String name;
+    private Integer orderNum;
 
-    private Integer price;
+    @OneToOne
+    @MapsId
+    private ProductEntity productEntity;
 
-    private String unit;
-
-    private String imgLink;
-
-    @OneToOne(mappedBy = "productEntity", cascade = CascadeType.REMOVE)
-    private OrderEntity order;
 }

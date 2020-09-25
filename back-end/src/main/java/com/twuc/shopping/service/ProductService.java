@@ -34,7 +34,7 @@ public class ProductService {
             throw new BaseProductException("the product name is existed!");
         }
         ProductResponse<ProductEntity> response = new ProductResponse<>();
-        response.setCode(200);
+        response.setCode(201);
         response.setMessage("create product success!");
         ProductEntity productEntity = ProductEntity.builder()
                 .name(productRequest.getName())
