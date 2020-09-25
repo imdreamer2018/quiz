@@ -1,5 +1,6 @@
 package com.twuc.shopping.ServiceTests;
 
+import com.twuc.shopping.dto.ProductRequest;
 import com.twuc.shopping.dto.ProductResponse;
 import com.twuc.shopping.entity.ProductEntity;
 import com.twuc.shopping.repository.ProductRepository;
@@ -46,6 +47,26 @@ public class ProductServiceTest {
         when(productRepository.findAll()).thenReturn(products);
         ProductResponse<List<ProductEntity>> response = productService.getAllProducts();
         assertEquals("get all products success!", response.getMessage());
+    }
+
+    @Test
+    void should_return_product_info_when_create_product_success() {
+        ProductRequest productRequest = ProductRequest.builder()
+                .name("雪碧")
+                .price(3)
+                .unit("瓶")
+                .imgLink("http://11.com")
+                .build();
+        ProductResponse<ProductEntity> response = productService.createProduct(productRequest);
+        assertEquals("create product success!", response.getMessage());
+        verify(productRepository)
+                .save(
+                        ProductEntity.builder()
+                                .name(productRequest.getName())
+                                .price(productRequest.getPrice())
+                                .unit(productRequest.getUnit())
+                                .imgLink(productRequest.getImgLink())
+                                .build());
     }
 
 }
