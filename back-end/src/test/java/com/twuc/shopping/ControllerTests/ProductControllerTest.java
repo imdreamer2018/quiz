@@ -81,4 +81,59 @@ public class ProductControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    @Test
+    void should_throw_exception_when_create_product_name_is_null() throws Exception {
+        productRepository.save(productEntity);
+        String jsonValue =
+                "{\"name\":,\"price\":3,\"unit\": \"瓶\", \"imgLink\":\"http://11.com\"}";
+        mockMvc
+                .perform(post("/products")
+                        .content(jsonValue).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void should_throw_exception_when_create_product_price_is_not_number() throws Exception {
+        productRepository.save(productEntity);
+        String jsonValue =
+                "{\"name\":\"雪碧\",\"price\":3fff,\"unit\": \"瓶\", \"imgLink\":\"http://11.com\"}";
+        mockMvc
+                .perform(post("/products")
+                        .content(jsonValue).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void should_throw_exception_when_create_product_price_is_null() throws Exception {
+        productRepository.save(productEntity);
+        String jsonValue =
+                "{\"name\":\"雪碧\",\"price\":,\"unit\": \"瓶\", \"imgLink\":\"http://11.com\"}";
+        mockMvc
+                .perform(post("/products")
+                        .content(jsonValue).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void should_throw_exception_when_create_product_unit_is_null() throws Exception {
+        productRepository.save(productEntity);
+        String jsonValue =
+                "{\"name\":\"雪碧\",\"price\":3,\"unit\":, \"imgLink\":\"http://11.com\"}";
+        mockMvc
+                .perform(post("/products")
+                        .content(jsonValue).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void should_throw_exception_when_create_product_imgLink_is_null() throws Exception {
+        productRepository.save(productEntity);
+        String jsonValue =
+                "{\"name\":\"雪碧\",\"price\":3,\"unit\": \"瓶\", \"imgLink\":}";
+        mockMvc
+                .perform(post("/products")
+                        .content(jsonValue).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
 }
