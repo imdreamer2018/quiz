@@ -1,4 +1,8 @@
 import React, {Component} from 'react';
+import Header from "./Header/Header";
+import Products from "./Products/Products";
+import Footer from "./Footer/Footer";
+import {Route} from "react-router-dom";
 
 class Shop extends Component {
   constructor(props) {
@@ -8,7 +12,11 @@ class Shop extends Component {
 
   render() {
     return (
-      <div></div>
+      <div>
+        <Header/>
+        <Route exact path="/" component={Products}/>
+        <Footer/>
+      </div>
     )
   }
 }
