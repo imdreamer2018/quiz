@@ -8,11 +8,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.hasKey;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -48,4 +54,20 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$.data[0].price", is(3)))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    void should_get_product_when_create_product_success() throws Exception {
+        String jsonValue =
+                "{\"name\":\"雪碧\",\"price\":3,\"unit\": \"瓶\", \"imgLink\":\"http://11.com\"}";
+        mockMvc
+                .perform(post("/products")
+                .content(jsonValue).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+        List<ProductEntity> all = productRepository.findAll();
+        assertNotNull(all);
+        assertEquals(all.size(), 1);
+        assertEquals(all.get(0).getName(), "雪碧");
+        assertEquals(all.get(0).getPrice(), 3);
+    }
+
 }
