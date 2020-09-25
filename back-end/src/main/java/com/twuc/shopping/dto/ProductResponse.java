@@ -1,4 +1,13 @@
 package com.twuc.shopping.dto;
 
-public class ProductResponse {
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class ProductResponse<T> {
+
+    private Integer code;
+    private String message;
+    private T data;
 }
