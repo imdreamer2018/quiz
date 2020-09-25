@@ -11,7 +11,7 @@ class Product extends Component {
           <div className="card-body">
             <h5 className="card-title">{this.props.product.name}</h5>
             <p className="card-text">单价：{this.props.product.price}/{this.props.product.unit}</p>
-            <Link className="btn btn-primary" to="/calculator">点击前往</Link>
+            <button className="btn btn-primary" >添加到购物车</button>
           </div>
         </div>
     )
