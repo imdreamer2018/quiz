@@ -30,6 +30,6 @@ public class ProductEntity {
 
     private String imgLink;
 
-    @OneToOne(mappedBy = "productEntity", cascade = CascadeType.REMOVE)
-    private OrderEntity order;
+    @OneToMany(mappedBy = "productEntity", cascade = CascadeType.REMOVE)
+    private List<OrderEntity> order;
 }

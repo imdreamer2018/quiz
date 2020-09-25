@@ -23,8 +23,8 @@ public class OrderEntity {
 
     private Integer orderNum;
 
-    @OneToOne
-    @MapsId
+    @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private ProductEntity productEntity;
 
 }

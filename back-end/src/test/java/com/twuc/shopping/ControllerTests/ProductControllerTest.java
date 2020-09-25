@@ -1,6 +1,5 @@
 package com.twuc.shopping.ControllerTests;
 
-import com.twuc.shopping.dto.ProductRequest;
 import com.twuc.shopping.entity.ProductEntity;
 import com.twuc.shopping.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,8 +12,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
