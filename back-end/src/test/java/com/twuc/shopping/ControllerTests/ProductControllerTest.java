@@ -70,4 +70,15 @@ public class ProductControllerTest {
         assertEquals(all.get(0).getPrice(), 3);
     }
 
+    @Test
+    void should_throw_exception_when_create_product_name_is_existed() throws Exception {
+        productRepository.save(productEntity);
+        String jsonValue =
+                "{\"name\":\"雪碧\",\"price\":3,\"unit\": \"瓶\", \"imgLink\":\"http://11.com\"}";
+        mockMvc
+                .perform(post("/products")
+                        .content(jsonValue).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
 }
