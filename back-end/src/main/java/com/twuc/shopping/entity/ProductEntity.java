@@ -1,5 +1,6 @@
 package com.twuc.shopping.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class ProductEntity {
 
     private String imgLink;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "productEntity", cascade = CascadeType.REMOVE)
     private List<OrderEntity> order;
 }
